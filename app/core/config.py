@@ -1,5 +1,6 @@
 import json
-from typing import List, Union
+import os
+from typing import List, Optional, Union
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -10,6 +11,21 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     PORT: int = 8000
     CORS_ORIGINS: Union[List[str], str] = ["*"]
+    DATABASE_URL: Optional[str] = None
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def assemble_db_url(cls, v: Optional[str]) -> str:
+        if not v:
+            v = (
+                os.getenv("POSTGRES_URL")
+                or os.getenv("DATABASE_PRIVATE_URL")
+                or os.getenv("DATABASE_PUBLIC_URL")
+                or "postgresql://postgres:postgrespassword@localhost:5432/loyalty_db"
+            )
+        if v and v.startswith("postgres://"):
+            return v.replace("postgres://", "postgresql://", 1)
+        return v
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
