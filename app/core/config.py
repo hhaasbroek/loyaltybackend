@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     PORT: int = 8000
     CORS_ORIGINS: Union[List[str], str] = ["*"]
     DATABASE_URL: Optional[str] = None
+    FIREBASE_CREDENTIALS_BASE64: Optional[str] = None
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod

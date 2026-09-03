@@ -4,19 +4,24 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.api import api_router
 from app.core.config import settings
+from app.core.firebase import get_firebase_app
 from app.db.init_db import init_db
-from app.db.session import SessionLocal
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize DB tables & seed initial data on startup
+    # Initialize DB tables on startup
     try:
-        db = SessionLocal()
-        init_db(db)
-        db.close()
+        init_db()
     except Exception as e:
         print(f"Warning: Database initialization failed: {e}")
+
+    # Initialize Firebase Admin SDK on startup
+    try:
+        get_firebase_app()
+    except Exception as e:
+        print(f"Warning: Firebase Admin init failed: {e}")
+
     yield
 
 
