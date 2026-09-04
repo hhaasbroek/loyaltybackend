@@ -21,7 +21,10 @@ def get_firebase_app() -> firebase_admin.App:
             "base64-encode the downloaded JSON, and set it as this env var."
         )
 
-    cred_json = base64.b64decode(settings.FIREBASE_CREDENTIALS_BASE64).decode("utf-8")
+    # Strip whitespace/newlines that web UI text inputs sometimes introduce
+    # when pasting a long single-line value.
+    b64 = "".join(settings.FIREBASE_CREDENTIALS_BASE64.split())
+    cred_json = base64.b64decode(b64).decode("utf-8")
     cred_dict = json.loads(cred_json)
     _firebase_app = firebase_admin.initialize_app(credentials.Certificate(cred_dict))
     return _firebase_app
