@@ -1,0 +1,282 @@
+{
+  "communities": {
+    "0": [
+      "app_api_v1_endpoints_cards",
+      "app_api_v1_endpoints_cards_create_card",
+      "app_api_v1_endpoints_cards_delete_card",
+      "app_api_v1_endpoints_cards_get_card",
+      "app_api_v1_endpoints_cards_list_cards",
+      "app_api_v1_endpoints_cards_py_get",
+      "app_api_v1_endpoints_cards_py_session",
+      "app_models_loyalty_card",
+      "app_models_loyalty_card_loyaltycarddb",
+      "app_models_loyalty_card_py_base",
+      "app_schemas_loyalty_card",
+      "app_schemas_loyalty_card_loyaltycard",
+      "app_schemas_loyalty_card_loyaltycardbase",
+      "app_schemas_loyalty_card_loyaltycardcreate",
+      "app_schemas_loyalty_card_py_basemodel",
+      "delete",
+      "post"
+    ],
+    "1": [
+      "app",
+      "app_api_v1_api",
+      "app_api_v1_endpoints_health",
+      "app_api_v1_endpoints_health_health_check",
+      "app_api_v1_endpoints_health_healthcheckresponse",
+      "app_api_v1_endpoints_health_py_basemodel",
+      "app_api_v1_endpoints_health_py_get",
+      "app_api_v1_endpoints_health_rationale_19",
+      "app_core_config",
+      "app_core_firebase",
+      "app_core_firebase_get_firebase_app",
+      "app_main",
+      "app_main_lifespan",
+      "app_main_py_get",
+      "app_main_root",
+      "fastapi"
+    ],
+    "2": [
+      "railway",
+      "railway_build",
+      "railway_build_builder",
+      "railway_build_dockerfilepath",
+      "railway_deploy",
+      "railway_deploy_healthcheckpath",
+      "railway_deploy_healthchecktimeout",
+      "railway_deploy_restartpolicymaxretries",
+      "railway_deploy_restartpolicytype",
+      "railway_schema"
+    ],
+    "3": [
+      "app_core_auth",
+      "app_db_init_db",
+      "app_db_init_db_init_db",
+      "app_db_session",
+      "app_db_session_get_db",
+      "app_models_user",
+      "tests_conftest"
+    ],
+    "4": [
+      "app_core_config_settings",
+      "app_core_config_settings_assemble_cors_origins",
+      "app_core_config_settings_assemble_db_url",
+      "basesettings",
+      "field_validator"
+    ],
+    "5": [
+      "tests_test_main",
+      "tests_test_main_test_create_card",
+      "tests_test_main_test_health_check",
+      "tests_test_main_test_list_cards",
+      "tests_test_main_test_read_root"
+    ],
+    "6": [
+      "app_core_auth_get_current_user",
+      "app_core_auth_py_session",
+      "httpauthorizationcredentials",
+      "tests_test_main_test_cards_require_auth"
+    ],
+    "7": [
+      "app_models_user_py_base",
+      "app_models_user_userdb",
+      "tests_conftest_fake_current_user",
+      "tests_test_main_test_cards_are_scoped_to_user"
+    ],
+    "8": [
+      "app_init",
+      "app_init_rationale_1"
+    ],
+    "9": [
+      "app_models_init",
+      "app_models_init_rationale_1"
+    ],
+    "10": [
+      "app_api_init"
+    ],
+    "11": [
+      "app_api_v1_endpoints_init"
+    ],
+    "12": [
+      "app_api_v1_init"
+    ],
+    "13": [
+      "app_core_init"
+    ],
+    "14": [
+      "app_db_init"
+    ],
+    "15": [
+      "app_schemas_init"
+    ],
+    "16": [
+      "tests_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.2426470588235294,
+    "1": 0.19166666666666668,
+    "2": 0.2,
+    "3": 0.5714285714285714,
+    "4": 0.5,
+    "5": 0.4,
+    "6": 0.5,
+    "7": 0.6666666666666666,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0
+  },
+  "gods": [
+    {
+      "id": "app_models_user_userdb",
+      "label": "UserDB",
+      "degree": 13
+    },
+    {
+      "id": "app_core_auth_get_current_user",
+      "label": "get_current_user()",
+      "degree": 9
+    },
+    {
+      "id": "app_models_loyalty_card_loyaltycarddb",
+      "label": "LoyaltyCardDB",
+      "degree": 7
+    },
+    {
+      "id": "app_api_v1_endpoints_cards_create_card",
+      "label": "create_card()",
+      "degree": 7
+    },
+    {
+      "id": "app_schemas_loyalty_card_loyaltycard",
+      "label": "LoyaltyCard",
+      "degree": 6
+    },
+    {
+      "id": "app_api_v1_endpoints_cards_get_card",
+      "label": "get_card()",
+      "degree": 6
+    },
+    {
+      "id": "app_api_v1_endpoints_cards_list_cards",
+      "label": "list_cards()",
+      "degree": 6
+    },
+    {
+      "id": "app_core_firebase_get_firebase_app",
+      "label": "get_firebase_app()",
+      "degree": 6
+    },
+    {
+      "id": "app_api_v1_endpoints_cards_delete_card",
+      "label": "delete_card()",
+      "degree": 5
+    },
+    {
+      "id": "tests_conftest_fake_current_user",
+      "label": "_fake_current_user()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "test_cards_require_auth()",
+      "target": "get_current_user()",
+      "source_files": [
+        "tests/test_main.py",
+        "app/core/auth.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "indirect_call",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "create_card()",
+      "target": "UserDB",
+      "source_files": [
+        "app/api/v1/endpoints/cards.py",
+        "app/models/user.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "delete_card()",
+      "target": "UserDB",
+      "source_files": [
+        "app/api/v1/endpoints/cards.py",
+        "app/models/user.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "get_card()",
+      "target": "UserDB",
+      "source_files": [
+        "app/api/v1/endpoints/cards.py",
+        "app/models/user.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "list_cards()",
+      "target": "UserDB",
+      "source_files": [
+        "app/api/v1/endpoints/cards.py",
+        "app/models/user.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `UserDB` connect `UserDB` to `cards.py`, `auth.py`, `test_main.py`, `get_current_user`?",
+      "why": "High betweenness centrality (0.080) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Settings` connect `Settings` to `main.py`?",
+      "why": "High betweenness centrality (0.072) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `get_current_user()` connect `get_current_user` to `cards.py`, `main.py`, `auth.py`, `test_main.py`, `UserDB`?",
+      "why": "High betweenness centrality (0.056) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `UserDB` (e.g. with `create_card()` and `delete_card()`) actually correct?",
+      "why": "`UserDB` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `LoyaltyCardDB` (e.g. with `create_card()` and `delete_card()`) actually correct?",
+      "why": "`LoyaltyCardDB` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `create_card()` (e.g. with `LoyaltyCardDB` and `UserDB`) actually correct?",
+      "why": "`create_card()` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `builder`, `dockerfilePath`, `healthcheckPath` to the rest of the system?",
+      "why": "7 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

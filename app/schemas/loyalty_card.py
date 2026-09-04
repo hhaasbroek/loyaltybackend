@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -15,6 +15,9 @@ class LoyaltyCardBase(BaseModel):
         default="creditcard", description="Icon identifier for mobile UI"
     )
     points: int = Field(default=0, description="Loyalty points total")
+    brand_id: Optional[str] = Field(
+        default=None, description="Known store brand identifier for template card art"
+    )
 
 
 class LoyaltyCardCreate(LoyaltyCardBase):

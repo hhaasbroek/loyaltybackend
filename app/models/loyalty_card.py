@@ -15,3 +15,4 @@ class LoyaltyCardDB(Base):
     gradient_colors = Column(JSON, nullable=False)
     icon_name = Column(String, nullable=False, default="creditcard_fill")
     points = Column(Integer, nullable=False, default=0)
+    brand_id = Column(String, nullable=True)
