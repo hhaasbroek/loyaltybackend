@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.auth import get_current_user
+from app.core.cache import get_cached_cards, invalidate_cards, set_cached_cards
 from app.db.session import get_db
 from app.models.loyalty_card import LoyaltyCardDB
 from app.models.user import UserDB
@@ -17,12 +18,18 @@ async def list_cards(
     db: Session = Depends(get_db),
     current_user: UserDB = Depends(get_current_user),
 ) -> List[LoyaltyCard]:
+    cached = get_cached_cards(current_user.id)
+    if cached is not None:
+        return cached
+
     cards = (
         db.query(LoyaltyCardDB)
         .filter(LoyaltyCardDB.user_id == current_user.id)
         .all()
     )
-    return cards
+    result = [LoyaltyCard.model_validate(card).model_dump(mode="json") for card in cards]
+    set_cached_cards(current_user.id, result)
+    return result
 
 
 @router.post(
@@ -44,6 +51,7 @@ async def create_card(
     db.add(db_card)
     db.commit()
     db.refresh(db_card)
+    invalidate_cards(current_user.id)
     return db_card
 
 
@@ -86,4 +94,5 @@ async def delete_card(
         )
     db.delete(card)
     db.commit()
+    invalidate_cards(current_user.id)
     return None

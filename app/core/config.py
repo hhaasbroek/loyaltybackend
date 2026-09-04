@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     CORS_ORIGINS: Union[List[str], str] = ["*"]
     DATABASE_URL: Optional[str] = None
     FIREBASE_CREDENTIALS_BASE64: Optional[str] = None
+    REDIS_URL: Optional[str] = None
+    CARD_CACHE_TTL_SECONDS: int = 900
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
@@ -26,6 +28,17 @@ class Settings(BaseSettings):
             )
         if v and v.startswith("postgres://"):
             return v.replace("postgres://", "postgresql://", 1)
+        return v
+
+    @field_validator("REDIS_URL", mode="before")
+    @classmethod
+    def assemble_redis_url(cls, v: Optional[str]) -> Optional[str]:
+        if not v:
+            v = (
+                os.getenv("REDIS_URL")
+                or os.getenv("REDIS_PRIVATE_URL")
+                or os.getenv("REDIS_PUBLIC_URL")
+            )
         return v
 
     @field_validator("CORS_ORIGINS", mode="before")
