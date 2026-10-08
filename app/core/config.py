@@ -26,8 +26,13 @@ class Settings(BaseSettings):
                 or os.getenv("DATABASE_PUBLIC_URL")
                 or "postgresql://postgres:postgrespassword@localhost:5432/loyalty_db"
             )
-        if v and v.startswith("postgres://"):
-            return v.replace("postgres://", "postgresql://", 1)
+        if v.startswith("postgres://"):
+            v = v.replace("postgres://", "postgresql://", 1)
+        # Name the driver explicitly. SQLAlchemy 2.1 changed the default for a bare
+        # postgresql:// URL from psycopg2 to psycopg (v3); we ship psycopg2-binary, so leaving
+        # it implicit crashed the backend on startup after a fresh dependency install.
+        if v.startswith("postgresql://"):
+            v = v.replace("postgresql://", "postgresql+psycopg2://", 1)
         return v
 
     @field_validator("REDIS_URL", mode="before")
